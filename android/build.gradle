@@ -1,0 +1,27 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenCentral{
+            maven {
+                url = uri("https://www.maven.crackle.co.in/releases")
+                credentials {
+                    username = "admin"
+                    password = "ycqcKDmwGHQvfqw0pWmzCUu32Q8xHRx/2Ea5OivM82eOv2FmQJjCdAOhMquZv+UH"
+                }
+            }
+        }
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
